@@ -51,4 +51,26 @@ public class Util {
 
 		return c;
 	}
+
+	/**
+	 * Joins an arbitrary number of strings using a delimiter.
+	 * 
+	 * @param delim
+	 *            a string delimiter
+	 * @param strings
+	 *            a string iterable
+	 * @return the delimiter-joined string
+	 */
+	public static String join(String delim, String... strings) {
+		StringBuilder sb = new StringBuilder();
+		String loopDelim = "";
+		for (String str : strings) {
+			sb.append(loopDelim);
+			sb.append(str);
+
+			loopDelim = delim;
+		}
+
+		return sb.toString();
+	}
 }

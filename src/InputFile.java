@@ -3,10 +3,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public abstract class FileModel {
+public abstract class InputFile {
 
-	public FileModel(String filePath) {
-		Logger.printDebug(FileModel.class, "Processing file " + filePath);
+	public InputFile(String filePath) {
+		Logger.printDebug(InputFile.class, "Processing file " + filePath);
 
 		try {
 			// process each line of the input file
@@ -17,11 +17,11 @@ public abstract class FileModel {
 			br.close();
 
 		} catch (FileNotFoundException e) {
-			Logger.printErrorAndExit(FileModel.class, "File not found "
+			Logger.printErrorAndExit(InputFile.class, "File not found "
 					+ filePath);
 
 		} catch (IOException e) {
-			Logger.printErrorAndExit(FileModel.class, "Could not close file "
+			Logger.printErrorAndExit(InputFile.class, "Could not close file "
 					+ filePath);
 		}
 
