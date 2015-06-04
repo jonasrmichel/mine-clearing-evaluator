@@ -20,4 +20,7 @@ public class Settings {
 
 	/** The character representing a position with a missed mine. */
 	public static final char MISSED_MINE_CHARACTER = '*';
+	
+	/** The maximum number of instructions per simulation step. */
+	public static final int MAX_STEP_INSTRUCTIONS = 2;
 }

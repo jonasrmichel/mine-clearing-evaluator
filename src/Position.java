@@ -36,6 +36,16 @@ public class Position {
 	public void setZ(int z) {
 		this.z = z;
 	}
+	
+	/**
+	 * Translates the position's coordinates.
+	 * @param position the amount to translate the (x,y,z) coordinates
+	 */
+	public void translate(Position position) {
+		x = x + position.getX();
+		y = y + position.getY();
+		z = z + position.getZ();
+	}
 
 	@Override
 	public int hashCode() {

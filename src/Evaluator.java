@@ -8,10 +8,10 @@ public class Evaluator {
 	/** The current simulation step. */
 	int step;
 
-	/** Holds the current position of the script-controlled vessel. */
+	/** Holds the current position of the script-instructed vessel. */
 	private Position vessel;
 
-	/** Counts for scoring function. */
+	/** Stats for the scoring function. */
 	private int initialMines = 0, kmsMoved = 0, volleysFired = 0;
 
 	public Evaluator(String fieldFile, String scriptFile) {
@@ -77,7 +77,7 @@ public class Evaluator {
 	 */
 	public void printPostStep() {
 		// print the instruction executed at this step
-		System.out.println(script.getInstruction(step));
+		System.out.println(script.getInstructions(step));
 		System.out.println();
 
 		// print the state of the field
@@ -86,13 +86,47 @@ public class Evaluator {
 	}
 
 	/**
-	 * Simulations the execution of the current step's instruction on the mine
+	 * Simulates the execution of the current step's instruction on the mine
 	 * field.
 	 */
 	public void performStep() {
-		// TODO Auto-generated method stub
+		StepInstructions stepInstrunctions = script.getInstructions(step);
+		for (String instruction : stepInstrunctions.getInstructions()) {
+			if (StepInstructions.isFiringPattern(instruction))
+				performFiringPattern(instruction); // fire
+			else
+				performMove(instruction); // move
+		}
 
-		// update depth, kmsMoved, volleysFired
+		// dive!
+		vessel.translate(new Position(0, 0, Settings.FALL_RATE));
+	}
+
+	/**
+	 * Destroys any active mines at any of the firing pattern's xy-coordinates.
+	 * 
+	 * @param pattern
+	 *            a firing pattern instruction
+	 */
+	private void performFiringPattern(String pattern) {
+		for (Position torpedo : StepInstructions.FIRING_PATTERN_MAP
+				.get(pattern))
+			field.destroyMines(torpedo);
+
+		volleysFired++;
+	}
+
+	/**
+	 * Translates the vessel's xy-coordinates per a move instruction.
+	 * 
+	 * @param move
+	 *            a move instruction
+	 */
+	private void performMove(String move) {
+		Position translation = StepInstructions.MOVE_MAP.get(move);
+		vessel.translate(translation);
+
+		kmsMoved += Settings.MOVE_RATE;
 	}
 
 	/**

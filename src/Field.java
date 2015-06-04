@@ -90,6 +90,16 @@ public class Field extends InputFile {
 	}
 
 	/**
+	 * Destroys all mines located at a particular xy-coordinate.
+	 * 
+	 * @param position
+	 *            xy-coordinates to destroy field mines
+	 */
+	public void destroyMines(Position position) {
+		mineIndex.removeMine(position);
+	}
+
+	/**
 	 * Generates a string representing the current state of the mine field from
 	 * a particular point of view.
 	 * 

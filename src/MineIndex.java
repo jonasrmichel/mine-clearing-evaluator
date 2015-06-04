@@ -7,7 +7,11 @@ public class MineIndex {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void addMine(Position pos) {
+	public void addMine(Position position) {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public void removeMine(Position position) {
 		// TODO Auto-generated constructor stub
 	}
 	
