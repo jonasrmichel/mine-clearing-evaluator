@@ -73,4 +73,18 @@ public class Util {
 
 		return sb.toString();
 	}
+
+	/**
+	 * Scales a position by a scalar factor.
+	 * 
+	 * @param position
+	 *            a position
+	 * @param factor
+	 *            a scalar factor
+	 * @return the scaled position
+	 */
+	public static Position scale(Position position, int factor) {
+		return new Position(position.getX() * factor, position.getY() * factor,
+				position.getZ() * factor);
+	}
 }

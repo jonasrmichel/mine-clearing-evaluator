@@ -34,6 +34,9 @@ public class Field extends InputFile {
 		if (xDimension == 0 || yDimension == 0)
 			Logger.printErrorAndExit(Field.class,
 					"Please provide a non-empty field file");
+
+		// build the mine index
+		mineIndex.build();
 	}
 
 	public int getXDimension() {
@@ -58,12 +61,25 @@ public class Field extends InputFile {
 		return new Position(centerX, centerY);
 	}
 
+	/**
+	 * Returns the number of active mines in the mine field.
+	 * 
+	 * @return the number of active mines
+	 */
 	public int getNumMines() {
 		return mineIndex.count();
 	}
 
-	public int getNumMinesAbove(int depth) {
-		return mineIndex.getMinesAbove(depth).size();
+	/**
+	 * Returns whether or not there are any active mines at or above a
+	 * particular depth.
+	 * 
+	 * @param depth
+	 *            a depth at which to test
+	 * @return true if mines exist at or above the depth, false otherwise
+	 */
+	public boolean minesAbove(int depth) {
+		return mineIndex.getNumMinesAtOrAbove(depth) > 0;
 	}
 
 	/**
@@ -83,7 +99,7 @@ public class Field extends InputFile {
 
 			// add the mine at the appropriate depth
 			if (mineIndex == null)
-				mineIndex = new MineIndex();
+				mineIndex = new CustomMineIndex();
 
 			mineIndex.addMine(new Position(x, y, Util.translateToRange(c)));
 		}
@@ -96,19 +112,56 @@ public class Field extends InputFile {
 	 *            xy-coordinates to destroy field mines
 	 */
 	public void destroyMines(Position position) {
-		mineIndex.removeMine(position);
+		mineIndex.removeMineAtXY(position);
 	}
 
 	/**
-	 * Generates a string representing the current state of the mine field from
-	 * a particular point of view.
+	 * Generates a string representing the current state of the mine field
+	 * centered at a particular position within the field.
 	 * 
-	 * @param pov
+	 * @param viewPosition
 	 *            the position from which to view the field
 	 * @return a string representing the current state of the field
 	 */
-	public String toString(Position pov) {
-		// TODO Auto-generated constructor stub
-		return null;
+	public String toString(Position viewPosition) {
+		StringBuilder sb = new StringBuilder();
+
+		// retrieve the maximum x- and y-axis distances of mines from the
+		// viewing position
+		int maxX = mineIndex.getMaxXDistance(viewPosition);
+		int maxY = mineIndex.getMaxYDistance(viewPosition);
+
+		// center the field of view at the view position
+		Position start = new Position(viewPosition.getX() - maxX,
+				viewPosition.getY() + maxY);
+		Position stop = new Position(viewPosition.getX() + maxX,
+				viewPosition.getY() - maxY);
+
+		// build the string representing the state of the XY-plane of the field
+		Position fieldPosition, minePosition;
+		int mineRange;
+		for (int x = start.getX(); x <= stop.getX(); x++) {
+			for (int y = start.getY(); y <= stop.getY(); y++) {
+				// evaluate this (x,y) position
+				fieldPosition = new Position(x, y);
+				if ((minePosition = mineIndex.getMineAtXY(fieldPosition)) != null) {
+					// mined field position
+					mineRange = viewPosition.getZ() - minePosition.getZ();
+					if (mineRange <= 0) {
+						// missed mine
+						sb.append(Settings.MISSED_MINE_CHARACTER);
+
+					} else {
+						// active mine
+						sb.append(Util.translateToLetter(mineRange));
+					}
+				} else {
+					// empty field position
+					sb.append(Settings.EMPTY_POSITION_CHARACTER);
+				}
+			}
+		}
+
+		return sb.toString();
 	}
 }

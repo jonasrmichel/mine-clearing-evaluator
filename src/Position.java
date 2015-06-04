@@ -1,7 +1,6 @@
-
 public class Position {
 	private int x = 0, y = 0, z = 0;
-	
+
 	public Position(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -12,7 +11,7 @@ public class Position {
 		this.y = y;
 		this.z = z;
 	}
-	
+
 	public int getX() {
 		return x;
 	}
@@ -36,10 +35,12 @@ public class Position {
 	public void setZ(int z) {
 		this.z = z;
 	}
-	
+
 	/**
 	 * Translates the position's coordinates.
-	 * @param position the amount to translate the (x,y,z) coordinates
+	 * 
+	 * @param position
+	 *            the amount to translate the (x,y,z) coordinates
 	 */
 	public void translate(Position position) {
 		x = x + position.getX();

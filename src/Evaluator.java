@@ -54,7 +54,7 @@ public class Evaluator {
 	public boolean completed() {
 		return field.getNumMines() == 0 // no mines remaining
 				|| step > script.getNumInstructions() // script completed
-				|| field.getNumMinesAbove(vessel.getZ()) > 0; // passed mines
+				|| field.minesAbove(vessel.getZ()); // passed mines
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class Evaluator {
 	 */
 	private void performMove(String move) {
 		Position translation = StepInstructions.MOVE_MAP.get(move);
-		vessel.translate(translation);
+		vessel.translate(Util.scale(translation, Settings.MOVE_RATE));
 
 		kmsMoved += Settings.MOVE_RATE;
 	}

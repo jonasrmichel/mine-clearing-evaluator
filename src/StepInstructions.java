@@ -1,18 +1,16 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class StepInstructions {
 
 	/** Holds mappings from firing pattern names to offest positions. */
-	public static final Map<String, Set<Position>> FIRING_PATTERN_MAP;
+	public static final Map<String, List<Position>> FIRING_PATTERN_MAP;
 	static {
-		Map<String, Set<Position>> fpMap = new HashMap<String, Set<Position>>();
-		fpMap.put("alpha", new HashSet<Position>() {
+		Map<String, List<Position>> fpMap = new HashMap<String, List<Position>>();
+		fpMap.put("alpha", new ArrayList<Position>() {
 			{
 				add(new Position(-1, -1));
 				add(new Position(-1, 1));
@@ -20,7 +18,7 @@ public class StepInstructions {
 				add(new Position(1, 1));
 			}
 		});
-		fpMap.put("beta", new HashSet<Position>() {
+		fpMap.put("beta", new ArrayList<Position>() {
 			{
 				add(new Position(-1, 0));
 				add(new Position(0, -1));
@@ -28,14 +26,14 @@ public class StepInstructions {
 				add(new Position(1, 0));
 			}
 		});
-		fpMap.put("gamma", new HashSet<Position>() {
+		fpMap.put("gamma", new ArrayList<Position>() {
 			{
 				add(new Position(-1, 0));
 				add(new Position(0, 0));
 				add(new Position(1, 0));
 			}
 		});
-		fpMap.put("delta", new HashSet<Position>() {
+		fpMap.put("delta", new ArrayList<Position>() {
 			{
 				add(new Position(0, -1));
 				add(new Position(0, 0));
