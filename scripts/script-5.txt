@@ -1,5 +1,5 @@
 north
-delta south
+delta      south       
 west
 gamma east
 east

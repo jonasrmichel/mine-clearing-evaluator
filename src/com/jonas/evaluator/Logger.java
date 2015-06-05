@@ -15,7 +15,7 @@ public class Logger {
 	}
 
 	public static void printErrorAndExit(Class<?> clazz, String err) {
-		System.err.println("Error (" + clazz.getName() + ") : " + err);
+		System.err.println("Error (" + clazz.getName() + "): " + err);
 		System.err.println();
 		System.out.println("fail (0)");
 

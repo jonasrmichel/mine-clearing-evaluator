@@ -34,8 +34,9 @@ public class Script extends InputFileModel {
 	public void validate() {
 		Logger.printDebug(Script.class, "Validating script model");
 
-		if (instructions.isEmpty())
-			Logger.printErrorAndExit(Script.class,
+		if (instructions == null
+				|| (instructions != null && instructions.isEmpty()))
+			Logger.printErrorAndExit(Field.class,
 					"Please provide a non-empty script file");
 
 		for (StepInstructions instruction : instructions)
@@ -54,7 +55,7 @@ public class Script extends InputFileModel {
 	}
 
 	public int getNumInstructions() {
-		return instructions.size();
+		return instructions == null ? 0 : instructions.size();
 	}
 
 	/**
