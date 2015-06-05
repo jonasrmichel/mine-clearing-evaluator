@@ -3,6 +3,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
 public class CustomMineIndex implements MineIndex {
@@ -27,6 +28,8 @@ public class CustomMineIndex implements MineIndex {
 
 	@Override
 	public void build() {
+		Logger.printDebug(CustomMineIndex.class, "Builidng mine index");
+
 		// initialize data structures
 		mineMap = new LinkedHashMap<Position, Position>();
 		xCountMap = new TreeMap<Integer, Integer>();
@@ -59,6 +62,10 @@ public class CustomMineIndex implements MineIndex {
 			else
 				yCountMap.put(y, yCountMap.get(y) + 1);
 		}
+
+		Logger.printDebug(CustomMineIndex.class, mineMap.toString());
+		Logger.printDebug(CustomMineIndex.class, xCountMap.toString());
+		Logger.printDebug(CustomMineIndex.class, yCountMap.toString());
 	}
 
 	@Override
@@ -78,41 +85,57 @@ public class CustomMineIndex implements MineIndex {
 
 		// update the count for this mine's x-coordinate
 		int x = position.getX();
-		int xCount = xCountMap.get(x);
-		if (--xCount == 0)
-			xCountMap.remove(x);
-		else
-			xCountMap.put(x, xCount);
+		if (xCountMap.containsKey(x)) {
+			int xCount = xCountMap.get(x);
+			if (--xCount == 0)
+				xCountMap.remove(x);
+			else
+				xCountMap.put(x, xCount);
+		}
 
 		// update the count for this mine's y-coordinate
 		int y = position.getY();
-		int yCount = yCountMap.get(y);
-		if (--yCount == 0)
-			yCountMap.remove(y);
-		else
-			yCountMap.put(y, yCount);
+		if (yCountMap.containsKey(y)) {
+			int yCount = yCountMap.get(y);
+			if (--yCount == 0)
+				yCountMap.remove(y);
+			else
+				yCountMap.put(y, yCount);
+		}
 	}
 
 	@Override
 	public int getMaxXDistance(Position position) {
-		// get min and max mine x-coordinates
-		int minX = xCountMap.firstKey();
-		int maxX = xCountMap.lastKey();
+		try {
+			// get min and max mine x-coordinates
+			int minX = xCountMap.firstKey();
+			int maxX = xCountMap.lastKey();
 
-		// calculate which is farthest from the provided position
-		return Math.max(Math.abs(position.getX() - maxX),
-				Math.abs(position.getX() - minX));
+			// calculate which is farthest from the provided position
+			return Math.max(Math.abs(position.getX() - maxX),
+					Math.abs(position.getX() - minX));
+
+		} catch (NoSuchElementException e) {
+			// no mines
+			return 0;
+		}
 	}
 
 	@Override
 	public int getMaxYDistance(Position position) {
-		// get min and max mine x-coordinates
-		int minY = yCountMap.firstKey();
-		int maxY = yCountMap.lastKey();
+		try {
+			// get min and max mine x-coordinates
+			int minY = yCountMap.firstKey();
+			int maxY = yCountMap.lastKey();
 
-		// calculate which is farthest from the provided position
-		return Math.max(Math.abs(position.getY() - maxY),
-				Math.abs(position.getY() - minY));
+			// calculate which is farthest from the provided position
+			return Math.max(Math.abs(position.getY() - maxY),
+					Math.abs(position.getY() - minY));
+
+		} catch (NoSuchElementException e) {
+			// no mines
+			return 0;
+		}
 	}
 
 	@Override
@@ -135,5 +158,4 @@ public class CustomMineIndex implements MineIndex {
 		return numMines;
 
 	}
-
 }

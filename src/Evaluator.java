@@ -65,10 +65,11 @@ public class Evaluator {
 		// print the step number
 		System.out.println("Step " + step);
 		System.out.println();
+		
+		Logger.printDebug(Evaluator.class, vessel.toString());
 
 		// print the state of the field
 		System.out.println(field.toString(vessel));
-		System.out.println();
 	}
 
 	/**
@@ -79,10 +80,11 @@ public class Evaluator {
 		// print the instruction executed at this step
 		System.out.println(script.getInstructions(step));
 		System.out.println();
+		
+		Logger.printDebug(Evaluator.class, vessel.toString());
 
 		// print the state of the field
 		System.out.println(field.toString(vessel));
-		System.out.println();
 	}
 
 	/**
@@ -109,9 +111,9 @@ public class Evaluator {
 	 *            a firing pattern instruction
 	 */
 	private void performFiringPattern(String pattern) {
-		for (Position torpedo : StepInstructions.FIRING_PATTERN_MAP
+		for (Position position : StepInstructions.FIRING_PATTERN_MAP
 				.get(pattern))
-			field.destroyMines(torpedo);
+			field.destroyMines(vessel.relativePosition(position));
 
 		volleysFired++;
 	}

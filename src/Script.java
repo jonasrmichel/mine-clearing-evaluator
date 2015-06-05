@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Script extends InputFile {
-
 	/** Holds the in-order script instructions. */
 	private List<StepInstructions> instructions;
 
@@ -28,6 +27,9 @@ public class Script extends InputFile {
 		if (instructions.isEmpty())
 			Logger.printErrorAndExit(Script.class,
 					"Please provide a non-empty script file");
+		
+		for (StepInstructions instruction : instructions)
+			Logger.printDebug(Script.class, instruction.toString());
 	}
 
 	/**
@@ -54,14 +56,13 @@ public class Script extends InputFile {
 	private void parseLine(String[] lineInstructions) {
 		// extract the optional firing pattern and move instructions
 		StepInstructions stepInstrunctions = new StepInstructions();
-		for (int i = 0; i < lineInstructions.length; i++) {
+		for (int i = 0; i < lineInstructions.length; i++)
 			stepInstrunctions.addInstruction(lineInstructions[i].trim());
+		
+		// store the parsed instruction pair
+		if (instructions == null)
+			instructions = new ArrayList<StepInstructions>();
 
-			// store the parsed instruction pair
-			if (instructions == null)
-				instructions = new ArrayList<StepInstructions>();
-
-			instructions.add(stepInstrunctions);
-		}
+		instructions.add(stepInstrunctions);
 	}
 }

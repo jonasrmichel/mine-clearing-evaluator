@@ -1,5 +1,4 @@
 public class Util {
-
 	/**
 	 * Translates a character to an integer representing depth range. The
 	 * letters a-z map to 1-26 and A-Z map to 27-52.
@@ -36,7 +35,7 @@ public class Util {
 	 */
 	public static char translateToLetter(int range) {
 		// validate range
-		if (range < 1 || range > 27)
+		if (range < 1 || range > 52)
 			Logger.printErrorAndExit(Util.class, "Invalid range " + range);
 
 		char c = 'a';

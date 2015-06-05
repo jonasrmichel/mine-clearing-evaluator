@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 public class StepInstructions {
-
 	/** Holds mappings from firing pattern names to offest positions. */
 	public static final Map<String, List<Position>> FIRING_PATTERN_MAP;
 	static {

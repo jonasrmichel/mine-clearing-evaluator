@@ -1,13 +1,13 @@
 public class Field extends InputFile {
 	/** The field's x and y dimensions. */
-	private int xDimension = 0, yDimension = 0;
+	private int xDimension, yDimension;
 
 	/** Holds the currently active mines. */
 	private MineIndex mineIndex;
 
 	public Field(String fieldFile) {
 		super(fieldFile);
-
+		
 		// Note: the mine index will be initialized during parsing
 	}
 
@@ -93,7 +93,7 @@ public class Field extends InputFile {
 	private void parseLine(String line, int y) {
 		char c;
 		for (int x = 0; x < line.length(); x++) {
-			c = line.charAt(0);
+			c = line.charAt(x);
 			if (c == Settings.EMPTY_POSITION_CHARACTER)
 				continue;
 
@@ -133,9 +133,9 @@ public class Field extends InputFile {
 
 		// center the field of view at the view position
 		Position start = new Position(viewPosition.getX() - maxX,
-				viewPosition.getY() + maxY);
-		Position stop = new Position(viewPosition.getX() + maxX,
 				viewPosition.getY() - maxY);
+		Position stop = new Position(viewPosition.getX() + maxX,
+				viewPosition.getY() + maxY);
 
 		// build the string representing the state of the XY-plane of the field
 		Position fieldPosition, minePosition;
@@ -146,7 +146,7 @@ public class Field extends InputFile {
 				fieldPosition = new Position(x, y);
 				if ((minePosition = mineIndex.getMineAtXY(fieldPosition)) != null) {
 					// mined field position
-					mineRange = viewPosition.getZ() - minePosition.getZ();
+					mineRange = minePosition.getZ() - viewPosition.getZ();
 					if (mineRange <= 0) {
 						// missed mine
 						sb.append(Settings.MISSED_MINE_CHARACTER);
@@ -160,6 +160,7 @@ public class Field extends InputFile {
 					sb.append(Settings.EMPTY_POSITION_CHARACTER);
 				}
 			}
+			sb.append(System.getProperty("line.separator"));
 		}
 
 		return sb.toString();

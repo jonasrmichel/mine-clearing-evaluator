@@ -39,13 +39,28 @@ public class Position {
 	/**
 	 * Translates the position's coordinates.
 	 * 
-	 * @param position
+	 * @param offset
 	 *            the amount to translate the (x,y,z) coordinates
 	 */
-	public void translate(Position position) {
-		x = x + position.getX();
-		y = y + position.getY();
-		z = z + position.getZ();
+	public void translate(Position offset) {
+		x = x + offset.getX();
+		y = y + offset.getY();
+		z = z + offset.getZ();
+	}
+
+	/**
+	 * Returns a position relative to this position.
+	 * 
+	 * @param offset
+	 *            the amount to translate the relative position's (x,y,z)
+	 *            coordinates
+	 * @return the relative position
+	 */
+	public Position relativePosition(Position offset) {
+		Position relative = new Position(x, y, z);
+		relative.translate(offset);
+
+		return relative;
 	}
 
 	@Override
@@ -54,7 +69,6 @@ public class Position {
 		int result = 1;
 		result = prime * result + x;
 		result = prime * result + y;
-		result = prime * result + z;
 		return result;
 	}
 
@@ -71,9 +85,15 @@ public class Position {
 			return false;
 		if (y != other.y)
 			return false;
-		if (z != other.z)
-			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Position [x=").append(x).append(", y=").append(y)
+				.append(", z=").append(z).append("]");
+		return builder.toString();
 	}
 
 }

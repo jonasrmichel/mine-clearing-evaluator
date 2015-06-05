@@ -1,5 +1,4 @@
 public class Settings {
-
 	/** Debug mode. */
 	public static final boolean DEBUG_MODE = true;
 

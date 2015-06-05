@@ -1,7 +1,5 @@
-import java.util.List;
 
 public interface MineIndex {
-
 	/**
 	 * Builds the mine index. This must be performed before the index can be
 	 * accessed (i.e., after adding all mine positions).
