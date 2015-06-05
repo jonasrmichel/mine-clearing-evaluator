@@ -102,7 +102,7 @@ public class StepInstructions {
 	 *            a step instruction (move or fire)
 	 */
 	public void addInstruction(String instruction) {
-		if (instruction.isEmpty()) {
+		if (instruction.trim().isEmpty()) {
 			// blank instruction, ignore
 			return;
 

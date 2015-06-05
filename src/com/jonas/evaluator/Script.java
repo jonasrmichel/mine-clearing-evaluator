@@ -74,6 +74,7 @@ public class Script extends InputFileModel {
 		if (instructions == null)
 			instructions = new ArrayList<StepInstructions>();
 
-		instructions.add(stepInstrunctions);
+		if (stepInstrunctions.getInstructions().size() > 0)
+			instructions.add(stepInstrunctions);
 	}
 }
