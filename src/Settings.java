@@ -1,6 +1,6 @@
 public class Settings {
 	/** Debug mode. */
-	public static final boolean DEBUG_MODE = true;
+	public static final boolean DEBUG_MODE = false;
 
 	/** The rate at which a vessel "falls" through a cuboid in km/s. */
 	public static final int FALL_RATE = 1;

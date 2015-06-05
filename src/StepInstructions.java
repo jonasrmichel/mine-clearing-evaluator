@@ -47,10 +47,10 @@ public class StepInstructions {
 	public static final Map<String, Position> MOVE_MAP;
 	static {
 		Map<String, Position> mMap = new HashMap<String, Position>();
-		mMap.put("north", new Position(0, 1));
-		mMap.put("south", new Position(0, -1));
-		mMap.put("east", new Position(1, 0));
-		mMap.put("west", new Position(-1, 0));
+		mMap.put("north", new Position(0, -1)); // up
+		mMap.put("south", new Position(0, 1)); // down
+		mMap.put("east", new Position(1, 0)); // right
+		mMap.put("west", new Position(-1, 0)); // left
 
 		MOVE_MAP = Collections.unmodifiableMap(mMap);
 	}

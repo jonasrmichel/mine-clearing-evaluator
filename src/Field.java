@@ -7,7 +7,7 @@ public class Field extends InputFile {
 
 	public Field(String fieldFile) {
 		super(fieldFile);
-		
+
 		// Note: the mine index will be initialized during parsing
 	}
 
@@ -140,8 +140,8 @@ public class Field extends InputFile {
 		// build the string representing the state of the XY-plane of the field
 		Position fieldPosition, minePosition;
 		int mineRange;
-		for (int x = start.getX(); x <= stop.getX(); x++) {
-			for (int y = start.getY(); y <= stop.getY(); y++) {
+		for (int y = start.getY(); y <= stop.getY(); y++) {
+			for (int x = start.getX(); x <= stop.getX(); x++) {
 				// evaluate this (x,y) position
 				fieldPosition = new Position(x, y);
 				if ((minePosition = mineIndex.getMineAtXY(fieldPosition)) != null) {
