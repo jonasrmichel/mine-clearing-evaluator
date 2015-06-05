@@ -1,3 +1,12 @@
+package com.jonas.evaluator;
+
+/**
+ * This is a utility class containing helpful CLI output methods for debug and
+ * error handling purposes.
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
 public class Logger {
 
 	public static void printHelp() {
@@ -9,7 +18,7 @@ public class Logger {
 		System.err.println("Error (" + clazz.getName() + ") : " + err);
 		System.err.println();
 		System.out.println("fail (0)");
-		
+
 		System.exit(1);
 	}
 

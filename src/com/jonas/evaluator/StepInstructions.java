@@ -1,9 +1,20 @@
+package com.jonas.evaluator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class holds instructions for a single simulation step. An instruction
+ * may either be a "move" (see {@link MOVE_MAP}) or "firing pattern" (see
+ * {@link FIRING_PATTERN_MAP}). A single step main contain, at most, one move
+ * instruction and/or one firing pattern instruction.
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
 public class StepInstructions {
 	/** Holds mappings from firing pattern names to offest positions. */
 	public static final Map<String, List<Position>> FIRING_PATTERN_MAP;

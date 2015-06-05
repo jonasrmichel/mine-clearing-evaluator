@@ -1,4 +1,14 @@
-public class Field extends InputFile {
+package com.jonas.evaluator;
+
+/**
+ * This class represents the current state of the mine field cuboid space, which
+ * is initially provided by an input field file. The Field class delegates
+ * storage and retrieval of active mines to its {@link MineIndex}.
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
+public class Field extends InputFileModel {
 	/** The field's x and y dimensions. */
 	private int xDimension, yDimension;
 

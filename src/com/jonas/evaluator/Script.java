@@ -1,7 +1,17 @@
+package com.jonas.evaluator;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Script extends InputFile {
+/**
+ * This class holds the instructions that drive the actions of the mine clearing
+ * vessel at each simulation step. The script's data is provided by an input
+ * script file.
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
+public class Script extends InputFileModel {
 	/** Holds the in-order script instructions. */
 	private List<StepInstructions> instructions;
 
@@ -27,7 +37,7 @@ public class Script extends InputFile {
 		if (instructions.isEmpty())
 			Logger.printErrorAndExit(Script.class,
 					"Please provide a non-empty script file");
-		
+
 		for (StepInstructions instruction : instructions)
 			Logger.printDebug(Script.class, instruction.toString());
 	}
@@ -58,7 +68,7 @@ public class Script extends InputFile {
 		StepInstructions stepInstrunctions = new StepInstructions();
 		for (int i = 0; i < lineInstructions.length; i++)
 			stepInstrunctions.addInstruction(lineInstructions[i].trim());
-		
+
 		// store the parsed instruction pair
 		if (instructions == null)
 			instructions = new ArrayList<StepInstructions>();

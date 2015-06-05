@@ -1,4 +1,12 @@
+package com.jonas.evaluator;
 
+/**
+ * This interface defines the minimum required methods of a mine index employed
+ * by a {@link Field} to store and efficiently retrieve mine positions.
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
 public interface MineIndex {
 	/**
 	 * Builds the mine index. This must be performed before the index can be

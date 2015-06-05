@@ -1,3 +1,15 @@
+package com.jonas.evaluator;
+
+/**
+ * This class is the entry point for the mine clearing evaluator program. Usage:
+ * $ java Evaluator <field-file> <script-file>
+ * 
+ * The evaluator simulates the execution of the input script file on the input
+ * field file and scores the script's mine clearing performance.
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
 public class Evaluator {
 	/** Holds the state of the field cuboid. */
 	private Field field;
@@ -63,9 +75,9 @@ public class Evaluator {
 	 */
 	public void printPreStep() {
 		// print the step number
-		System.out.println("Step " + step);
-		System.out.println();
-		
+		System.out.println("Step " + step
+				+ System.getProperty("line.separator"));
+
 		Logger.printDebug(Evaluator.class, vessel.toString());
 
 		// print the state of the field
@@ -78,9 +90,9 @@ public class Evaluator {
 	 */
 	public void printPostStep() {
 		// print the instruction executed at this step
-		System.out.println(script.getInstructions(step));
-		System.out.println();
-		
+		System.out.println(script.getInstructions(step)
+				+ System.getProperty("line.separator"));
+
 		Logger.printDebug(Evaluator.class, vessel.toString());
 
 		// print the state of the field
@@ -101,7 +113,7 @@ public class Evaluator {
 		}
 
 		// dive!
-		vessel.translate(new Position(0, 0, Settings.FALL_RATE));
+		vessel.translate(new Position(0, 0, Settings.DIVE_RATE));
 	}
 
 	/**

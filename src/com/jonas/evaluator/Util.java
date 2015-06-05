@@ -1,3 +1,11 @@
+package com.jonas.evaluator;
+
+/**
+ * This class contains global utility functions used throughout the simulation.
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
 public class Util {
 	/**
 	 * Translates a character to an integer representing depth range. The

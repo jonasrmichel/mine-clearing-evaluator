@@ -1,3 +1,15 @@
+package com.jonas.evaluator;
+
+/**
+ * This class represents a position in the three dimensional mine field cuboid.
+ * It's important to note that a Position is hashed and identified using only
+ * its x- and y- coordinates (i.e., its z-coordinate is ignored). This
+ * functionality exists to support efficient position indexing (see
+ * {@link MineIndex}).
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
 public class Position {
 	private int x = 0, y = 0, z = 0;
 

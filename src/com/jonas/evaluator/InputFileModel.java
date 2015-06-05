@@ -1,12 +1,21 @@
+package com.jonas.evaluator;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public abstract class InputFile {
+/**
+ * This is an abstract class that represents a data model read line-by-line from
+ * an input file.
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
+public abstract class InputFileModel {
 
-	public InputFile(String filePath) {
-		Logger.printDebug(InputFile.class, "Processing file " + filePath);
+	public InputFileModel(String filePath) {
+		Logger.printDebug(InputFileModel.class, "Processing file " + filePath);
 
 		try {
 			// process each line of the input file
@@ -17,12 +26,12 @@ public abstract class InputFile {
 			br.close();
 
 		} catch (FileNotFoundException e) {
-			Logger.printErrorAndExit(InputFile.class, "File not found "
+			Logger.printErrorAndExit(InputFileModel.class, "File not found "
 					+ filePath);
 
 		} catch (IOException e) {
-			Logger.printErrorAndExit(InputFile.class, "Could not close file "
-					+ filePath);
+			Logger.printErrorAndExit(InputFileModel.class,
+					"Could not close file " + filePath);
 		}
 
 		// validate the model

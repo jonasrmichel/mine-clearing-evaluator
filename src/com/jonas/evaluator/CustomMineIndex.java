@@ -1,3 +1,5 @@
+package com.jonas.evaluator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -6,6 +8,26 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
+/**
+ * This is an implementation of a {@link MineIndex}. This implementation trades
+ * off the cost of building the index for space- and time-saving position
+ * retrieval.
+ * 
+ * The index comprises three key data structures. First, a {@link LinkedHashMap}
+ * maps xy-hashed mine positions to xyz-positions (i.e., the keys mask the
+ * z-coordinate) enabling constant time xy-position lookup. This map is ordered
+ * by its values' z-cooridnate to enable linear time "depth" lookups. The last
+ * two data structures are two {@link TreeMap}s that each respectively map an x-
+ * or y-coordinate to the current number of mines located at the coordinate.
+ * These two maps enable the mine coordinates at the extremes of the x- and
+ * y-axis to be retrieved in constant time for the minimum extreme and O(log n)
+ * time for the maximum extreme. However, there is an O(log n) penalty for
+ * removing a coordinate-count entry when all mines at a particular x- or
+ * y-coordinate are cleared.
+ * 
+ * @author Jonas Michel, jonas.r.michel@gmail.com
+ * 
+ */
 public class CustomMineIndex implements MineIndex {
 	/** A list for collecting unsorted mine positions. */
 	private List<Position> mineList;
@@ -62,6 +84,9 @@ public class CustomMineIndex implements MineIndex {
 			else
 				yCountMap.put(y, yCountMap.get(y) + 1);
 		}
+
+		// we no longer need the list of mine positions
+		mineList.clear();
 
 		Logger.printDebug(CustomMineIndex.class, mineMap.toString());
 		Logger.printDebug(CustomMineIndex.class, xCountMap.toString());
